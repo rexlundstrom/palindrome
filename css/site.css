@@ -75,7 +75,7 @@ footer {
 }
 
 .social-icons:hover {
-  color: var(--rex-highlight);
+  color: var(--rex-tertiary);
 }
 
 /*
@@ -108,4 +108,15 @@ Header
 
 .appLogo {
     max-width: 400px;
+}
+
+.btn-custom {
+  background-color: var(--rex-highlight);
+  border: solid black;
+  font-weight: bolder;
+}
+
+.btn-custom:hover {
+  border: solid black;
+  background-color: var(--rex-primary);
 }
