@@ -110,29 +110,42 @@ const getValues = () => {
   // get the user's input
   let userInput = document.getElementById("message").value;
   // send it through the reversed string function
-  let reversedInput = reverseString(userInput);
+  const palindromeInfoArray = checkForPalindrome(userInput);
 
-  displayString(reversedInput);
-}
+  displayResults(palindromeInfoArray);
+};
 
 // business logic
-const reverseString = (message) => {
+const checkForPalindrome = (message) => {
   // declare empty string
-  let output = '';
+  if (message == '') message = `Nothing at all`
+  let reversedStr = "";
+  let inputStr = message.replace(/[^a-zA-Z0-9]/g, '').toLowerCase();
+  const output = [message];
 
-  for (let i = message.length - 1; i >= 0; i--) {
-    output += message[i];
+  for (let i = inputStr.length - 1; i >= 0; i--) {
+    reversedStr += inputStr[i];
   }
-  // iterate over current string
+  output.push(reversedStr, reversedStr == inputStr);
   return output;
-}
+};
 
 // view function
-const displayString = (reversedMessage) => {
-  // display string on the page 
-  document.getElementById("msg").textContent = reversedMessage;
-  document.getElementById("alert").classList.remove('d-none');
-}
+const displayResults = (array) => {
+  // display string on the page
+  if (array[2] == true) {
+    // congrats message
+  document.getElementById("failure-alert").classList.add("d-none");
+  document.getElementById("success-message").textContent = `"${array[0]}" written backwards is ${array[1]}! You've got yourself a palindrome.`;
+  document.getElementById("success-alert").classList.remove("d-none");
+  } else {
+    // too bad message
+  document.getElementById("success-alert").classList.add("d-none");
+  document.getElementById("failure-message").textContent = `${array[0]} written backwards is ${array[1]} which is not a palindrome.`;
+  document.getElementById("failure-alert").classList.remove("d-none");
+  }
+};
+
 
 
             </code>
@@ -144,21 +157,21 @@ const displayString = (reversedMessage) => {
           </p>
           <h5>getValues</h5>
           <p>
-            this function searches our HTML by ID for a corresponding value that
-            the user enters
+            this function searches our HTML by ID for a corresponding string of
+            text that the user entered
           </p>
-          <h5>reverseString</h5>
+          <h5>checkForPalindrome</h5>
           <p>
-            this function will take our entered string and iterate over it
-            backwards. An empty variable called "output" is declared first, and
-            then the loop adds each new character to output starting last to
-            first.
+            This is where the magic happens. Regex is used to ignore all
+            characters besides numbers and letters. the string is reversed, and
+            then simply compared to the original string. It's important to
+            change the string to lowercase so that all letters are treated
+            equally.
           </p>
-          <h5>displayString</h5>
+          <h5>displayResults</h5>
           <p>
-            this function is simply here to show off the output onto the website
-            for the user. It looks for a labeled space to send the text and
-            pastes the variable as a string of text.
+            this function is here to show off the output onto the website
+            for the user, but it also is responible for deciding whether to give a success message or a failure message based on the array of information provided in its parameters.
           </p>
           <p>
             Together, these functions keep each piece of complexity separate, so
