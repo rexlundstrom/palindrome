@@ -14,6 +14,10 @@ const checkForPalindrome = (message) => {
   if (message == "") message = `Nothing at all`;
   let reversedStr = "";
   let inputStr = message.replace(/[^a-zA-Z0-9]/g, "").toLowerCase();
+  if (inputStr == "") {
+    message = `Random symbols`;
+    inputStr = `Random symbols`;
+  }
   const output = [message];
 
   for (let i = inputStr.length - 1; i >= 0; i--) {
